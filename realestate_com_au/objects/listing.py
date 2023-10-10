@@ -143,7 +143,7 @@ def get_listing(listing):
 
     property_id = listing.get("id")
     badge = listing.get("badge", {}).get("label")
-    url = listing.get("_links", {}).get("canonical", {}).get("href")
+    #url = listing.get("_links", {}).get("canonical", {}).get("href")
     address = listing.get("address", {})
     suburb = address.get("suburb")
     state = address.get("state")
@@ -175,16 +175,16 @@ def get_listing(listing):
     auction_date = auction.get("dateTime", {}).get("value")
     available_date_text = listing.get("availableDate", {}).get("display")
     available_date = parse_availability(available_date_text)
-    description = parse_description(listing.get("description"))
-    images = [get_image(media) for media in listing.get("media", []).get('images',[])]
+    #description = parse_description(listing.get("description"))
+    #images = [get_image(media) for media in listing.get("media", []).get('images',[])]
     images_floorplans = [get_image(media) for media in listing.get("media", []).get('floorplans',[])]
     listers = [get_lister(lister) for lister in listing.get("listers", [])]
     inspections = [get_inspection(inspection) for inspection in listing.get("inspections", [])]
 
     return Listing(
-        id=property_id,
-        badge=badge,
-        url=url,
+        id = property_id,
+        badge = badge,
+        #url = url,
         suburb=suburb,
         state=state,
         postcode=postcode,
@@ -194,6 +194,7 @@ def get_listing(listing):
         listing_company_id=listing_company_id,
         listing_company_name=listing_company_name,
         listing_company_phone=listing_company_phone,
+        features=features,
         bedrooms=bedrooms,
         bathrooms=bathrooms,
         parking_spaces=parking_spaces,
@@ -206,9 +207,10 @@ def get_listing(listing):
         auction_date=auction_date,
         available_date=available_date,
         sold_date=sold_date,
-        description=description,
-        images=images,
+        #description=description,
+        #images=images,
         images_floorplans=images_floorplans,
         listers=listers,
         inspections=inspections
+   
     )
